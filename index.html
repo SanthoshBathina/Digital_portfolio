@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bathina Santhosh — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF9F6;
+    --surface:#FFFFFF;
+    --ink:#1C1E1B;
+    --muted:#6B6F66;
+    --line:#E4E1D8;
+    --accent:#1F6F5C;
+    --accent-soft:#E4F0EA;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;}
+  html{scroll-behavior:smooth; scroll-padding-top:70px;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; margin:0; font-weight:500; letter-spacing:-0.01em;}
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  .wrap{max-width:800px; margin:0 auto; padding:0 24px;}
+
+  nav.topbar{
+    position:sticky; top:0; z-index:20;
+    padding-top:env(safe-area-inset-top,0px);
+    background:rgba(250,249,246,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{max-width:800px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .topbar-inner .name{font-family:'Fraunces'; font-size:15px; font-weight:500;}
+  .topbar-inner .links{display:flex; gap:22px; font-size:13.5px; overflow-x:auto;}
+  .topbar-inner .links a{color:var(--muted); white-space:nowrap;}
+  .topbar-inner .links a:hover{color:var(--ink); text-decoration:none;}
+
+  section{padding:72px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .eyebrow{color:var(--accent); font-size:13px; font-weight:600; margin-bottom:10px;}
+  h2{font-size:28px; margin-bottom:36px;}
+
+  /* hero */
+  .hero{padding-top:56px;}
+  .hero-grid{display:grid; grid-template-columns:1fr auto; gap:44px; align-items:center;}
+  .hero h1{font-size:clamp(32px,5.5vw,48px); line-height:1.12;}
+  .hero .role{font-size:17px; color:var(--accent); margin-top:12px; font-weight:500;}
+  .hero p{color:var(--muted); font-size:15.5px; line-height:1.75; max-width:52ch; margin-top:18px;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:26px; font-size:14px;}
+  .contact-row span{color:var(--muted);}
+  .photo{
+    width:180px; height:180px; border-radius:50%; overflow:hidden;
+    border:4px solid var(--surface); box-shadow:0 0 0 1px var(--line), 0 18px 32px -14px rgba(28,30,27,0.25);
+    flex-shrink:0;
+  }
+  .photo img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* skills */
+  .skill-row{display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--line);}
+  .skill-row:last-child{border-bottom:1px solid var(--line);}
+  .skill-row .label{width:150px; flex-shrink:0; color:var(--muted); font-size:13.5px; font-weight:500; padding-top:4px;}
+  .tag-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-size:13px; padding:5px 12px; border-radius:100px; background:var(--accent-soft); color:var(--accent); font-weight:500;}
+
+  /* projects */
+  .project{padding:32px 0; border-top:1px solid var(--line);}
+  .project:last-child{border-bottom:1px solid var(--line);}
+  .project-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
+  .project h3{font-size:21px;}
+  .project .date{color:var(--muted); font-size:13px; white-space:nowrap;}
+  .project .links{font-size:13.5px; margin-top:8px; display:flex; gap:16px;}
+  .project ul{margin:16px 0 0; padding-left:20px; color:var(--muted); font-size:14.5px; line-height:1.8;}
+  .project ul li{margin-bottom:3px;}
+  .stack{display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;}
+  .stack span{font-size:12px; color:var(--muted); border:1px solid var(--line); padding:3px 10px; border-radius:100px;}
+
+  /* training */
+  .train-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:28px; margin-bottom:20px;}
+  .train-card h3{font-size:18px;}
+  .train-card .date{color:var(--muted); font-size:13px; margin-top:4px; display:block;}
+  .train-card ul{margin:16px 0 0; padding-left:20px; color:var(--muted); font-size:14px; line-height:1.8;}
+  .cert-list{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  .cert-row{display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:16px 22px; font-size:14px; flex-wrap:wrap;}
+  .cert-row + .cert-row{border-top:1px solid var(--line);}
+  .cert-row .issuer{color:var(--muted);}
+  .cert-row .date{color:var(--muted); font-size:12.5px; white-space:nowrap;}
+
+  /* achievements */
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .stat{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:28px;}
+  .stat .num{font-family:'Fraunces'; font-size:36px; color:var(--accent);}
+  .stat p{color:var(--muted); font-size:14px; margin-top:10px; line-height:1.7;}
+
+  /* education */
+  .edu-item{display:flex; justify-content:space-between; gap:20px; padding:22px 0; border-top:1px solid var(--line); flex-wrap:wrap;}
+  .edu-item:last-child{border-bottom:1px solid var(--line);}
+  .edu-item h3{font-size:17px;}
+  .edu-item .loc{color:var(--accent); font-size:13px; margin-top:4px;}
+  .edu-item .deg{color:var(--muted); font-size:14px; margin-top:6px;}
+  .edu-item .date{color:var(--muted); font-size:13px; white-space:nowrap; text-align:right;}
+
+  footer{padding:64px 0 56px;}
+  footer h2{margin-bottom:14px;}
+  footer p{color:var(--muted); font-size:15px; max-width:44ch;}
+  .foot-links{display:flex; flex-wrap:wrap; gap:20px; margin-top:24px; font-size:14.5px;}
+  footer .end{color:var(--muted); font-size:12.5px; margin-top:44px; border-top:1px solid var(--line); padding-top:20px;}
+
+  @media (max-width:640px){
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .photo{order:-1; width:120px; height:120px;}
+    .skill-row{flex-direction:column; gap:8px;}
+    .skill-row .label{width:auto;}
+    .project-head{flex-direction:column; align-items:flex-start;}
+    .stat-grid{grid-template-columns:1fr;}
+    .edu-item{flex-direction:column; gap:4px;}
+    .edu-item .date{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <span class="name">Bathina Santhosh</span>
+    <div class="links">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#training">Training</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h1>Full&#8209;stack developer, building products end to end.</h1>
+        <div class="role">B.Tech CSE student, Lovely Professional University</div>
+        <p>Three shipped MERN and AI-backed applications, from authentication and database design through to deployed, working products. Comfortable across the stack: React, Node.js and Express with MongoDB, plus FastAPI backends wired to Gemini and Groq.</p>
+        <div class="contact-row">
+          <a href="mailto:bathinasanthosh87@gmail.com">bathinasanthosh87@gmail.com</a>
+          <span>+91 99598 06532</span>
+          <a href="https://github.com/SanthoshBathina" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/santhosh2217/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="data:image/jpeg;base64,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" alt="Portrait of Bathina Santhosh">
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="eyebrow">Skills</div>
+    <h2>What I work with</h2>
+    <div class="skill-row"><div class="label">Languages</div><div class="tag-list"><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">HTML</span><span class="tag">CSS</span></div></div>
+    <div class="skill-row"><div class="label">Frameworks &amp; libraries</div><div class="tag-list"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">FastAPI</span><span class="tag">Mongoose</span><span class="tag">Tailwind CSS</span></div></div>
+    <div class="skill-row"><div class="label">Tools &amp; platforms</div><div class="tag-list"><span class="tag">MongoDB</span><span class="tag">Gemini API</span><span class="tag">Groq API</span><span class="tag">JWT</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Vercel</span></div></div>
+    <div class="skill-row"><div class="label">Soft skills</div><div class="tag-list"><span class="tag">Problem-Solving</span><span class="tag">Team Collaboration</span><span class="tag">Time Management</span><span class="tag">Self-Learning</span></div></div>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow">Projects</div>
+    <h2>Selected work</h2>
+    <div class="project">
+      <div class="project-head"><h3>Smart Event Management System</h3><span class="date">Jun&ndash;Jul 2026</span></div>
+      <div class="links"><a href="https://github.com/SanthoshBathina/Smart-Event-Management-System" target="_blank" rel="noopener">GitHub</a><a href="https://smart-event-management-system-rho.vercel.app/" target="_blank" rel="noopener">Live site</a></div>
+      <ul><li>Engineered a MERN event platform with 19 React pages, 23 API routes, and 4 Mongoose models for events, registrations, attendance, and users</li><li>Established JWT sessions with role-based middleware protecting 18 routes, 10 of them admin-only, separating admin and attendee permissions</li><li>Automated seat tracking and attendance: registrations check capacity, block duplicates, update available seats, and create attendance records that admins mark present or absent</li></ul>
+      <div class="stack"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Mongoose</span><span>JWT</span></div>
+    </div>
+    <div class="project">
+      <div class="project-head"><h3>PAS GPT &mdash; AI Chat Assistant</h3><span class="date">Mar&ndash;May 2026</span></div>
+      <div class="links"><a href="https://github.com/SanthoshBathina/AI-Project" target="_blank" rel="noopener">GitHub</a><a href="https://ai-project-3dgcfmkws-santu2217.vercel.app/" target="_blank" rel="noopener">Live site</a></div>
+      <ul><li>Developed a FastAPI backend with 7 REST endpoints that routes chat queries to Google Gemini 2.5 Flash or Groq (Llama 3.1 8B), with file-based queries handled by Gemini</li><li>Secured protected endpoints with JWT, bcrypt password hashing, and Google OAuth login, and blocked 31 disposable email domains at signup</li><li>Configured automated signup and login email alerts through Gmail SMTP, with user accounts stored in a MongoDB users collection</li></ul>
+      <div class="stack"><span>FastAPI</span><span>Gemini</span><span>Groq</span><span>MongoDB</span><span>JWT</span><span>OAuth</span></div>
+    </div>
+    <div class="project">
+      <div class="project-head"><h3>BudgetX &mdash; Personal Finance Tracker</h3><span class="date">Oct&ndash;Nov 2025</span></div>
+      <div class="links"><a href="https://github.com/SanthoshBathina/budgetx-app" target="_blank" rel="noopener">GitHub</a><a href="https://budgetx-app.vercel.app/" target="_blank" rel="noopener">Live site</a></div>
+      <ul><li>Built a personal finance tracker with vanilla JavaScript, Node.js, Express, and MongoDB, exposing 10 API routes for expenses, budgets, and sign-in</li><li>Implemented JWT-secured sign-in with bcrypt hashing, token-based credential recovery, and Nodemailer welcome messages</li><li>Designed category-wise spend limits that turn orange above 80% and red above 100% of the limit, with suggestion chips and Chart.js donut charts on a glassmorphism dashboard</li></ul>
+      <div class="stack"><span>JavaScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Chart.js</span></div>
+    </div>
+  </section>
+
+  <section id="training">
+    <div class="eyebrow">Training &amp; certifications</div>
+    <h2>Continued learning</h2>
+
+    <div class="train-card">
+      <h3>AI-Driven MERN Stack Bootcamp with DevOps</h3>
+      <span class="date">Jun&ndash;Jul 2026 &middot; <a href="https://drive.google.com/file/d/1p5D1pM7gHrxgjLBBPf4vMNW46LkvPVr_/view?usp=sharing" target="_blank" rel="noopener">Certificate</a></span>
+      <ul>
+        <li>Undertook a hands-on program of 4 weeks and 60 hours, pairing full-stack fundamentals in MongoDB, Express, React, and Node.js with release tooling and guided practice</li>
+        <li>Delivered coursework spanning client-side interfaces, server logic, and data persistence, giving direct exposure to every layer from the browser down to the database</li>
+        <li>Practiced CI/CD and containerization concepts in lab sessions, then deployed a React frontend on Vercel straight from GitHub, closing the course with an A grade overall</li>
+      </ul>
+    </div>
+
+    <div class="cert-list">
+      <div class="cert-row"><span>Intro to AI &middot; <a href="https://drive.google.com/file/d/1hnHWI3W4K-lkMMjcNe3JekWsZtuFOB9U/view?usp=sharing" target="_blank" rel="noopener" class="issuer">Udemy</a></span><span class="date">Sep 2026</span></div>
+      <div class="cert-row"><span>Oracle Data Platform 2026 &mdash; Certified Foundations Associate &middot; <a href="https://drive.google.com/file/d/1f0V6nByMbtqLcDIcNPGNZADrcj7PBpJO/view?usp=sharing" target="_blank" rel="noopener" class="issuer">Oracle</a></span><span class="date">Aug 2026</span></div>
+      <div class="cert-row"><span>React.js &middot; <a href="https://drive.google.com/file/d/1ruraXDfNRpTJSUrVnCLYnJHUeEs19Flx/view?usp=sharing" target="_blank" rel="noopener" class="issuer">Tech Veda</a></span><span class="date">Mar 2025</span></div>
+      <div class="cert-row"><span>Web Development &middot; <a href="https://drive.google.com/file/d/1vUi2d0zX2RPXFWQIUSdBS8Xm7f9IgDjF/view?usp=sharing" target="_blank" rel="noopener" class="issuer">Rising Tech Pro</a></span><span class="date">Jan 2025</span></div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="eyebrow">Achievements</div>
+    <h2>Track record</h2>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="num">100+</div>
+        <p>DSA problems solved on LeetCode, covering arrays, strings and recursion. Aug 2024 &ndash; present.</p>
+      </div>
+      <div class="stat">
+        <div class="num">5&#9733;</div>
+        <p>Python Programming badge on HackerRank, awarded for strong coding performance. 2025.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="eyebrow">Education</div>
+    <h2>Academic background</h2>
+    <div class="edu-item">
+      <div>
+        <h3>Lovely Professional University</h3>
+        <div class="loc">Phagwara, Punjab</div>
+        <div class="deg">Bachelor of Technology &mdash; Computer Science and Engineering &middot; CGPA 7.73</div>
+      </div>
+      <div class="date">Aug 2024 &ndash; Present</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <h3>Bhashyam Junior College</h3>
+        <div class="loc">Guntur, Andhra Pradesh</div>
+        <div class="deg">Intermediate &middot; 97%</div>
+      </div>
+      <div class="date">Jul 2022 &ndash; May 2024</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <h3>Bhashyam E.M. High School</h3>
+        <div class="loc">Rajahmundry, Andhra Pradesh</div>
+        <div class="deg">10th &middot; 89%</div>
+      </div>
+      <div class="date">Jul 2021 &ndash; May 2022</div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="eyebrow">Contact</div>
+    <h2>Let's work together</h2>
+    <p>Happy to talk about any of the projects above in more detail.</p>
+    <div class="foot-links">
+      <a href="mailto:bathinasanthosh87@gmail.com">bathinasanthosh87@gmail.com</a>
+      <a href="tel:+919959806532">+91 99598 06532</a>
+      <a href="https://github.com/SanthoshBathina" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/santhosh2217/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="end">Bathina Santhosh &middot; Computer Science &amp; Engineering, Lovely Professional University</div>
+  </footer>
+
+</main>
+</body>
+</html>
